@@ -4,10 +4,6 @@ import os
 import datetime
 import time
 
-# Used for both Gmail account and Spotify account
-email_address = "MBDgroup3@gmail.com"
-password = "LMRSgroep3"
-
 
 # Uses the 'Client Credentials Flow'
 def get_access_token():
@@ -29,20 +25,19 @@ def get_access_token():
     return ACCESS_TOKEN, expires_in, token_type
 
 
-def 
-
-# I guess we need threads to check every ~hour to refresh tokens
-# BUFFER = 60  # 1 minute buffer just to be sure
-# start = datetime.datetime.now()
-# if datetime.datetime.now() > start+datetime.timedelta(seconds=expires_in-BUFFER):
-#     ACCESS_TOKEN, expires_in, token_type = get_access_token()
-
 # ACCESS_TOKEN expires in exactly 1 hour. Then a new ACCESS_TOKEN needs to be requested.
 ACCESS_TOKEN, expires_in, token_type = get_access_token()
 
 response = requests.get("https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V",
                         headers={"Authorization": token_type + " " + ACCESS_TOKEN})
 print(response.json())
+
+
+# I guess we need threads to check every ~hour to refresh tokens
+# BUFFER = 60  # 1 minute buffer just to be sure
+# start = datetime.datetime.now()
+# if datetime.datetime.now() > start+datetime.timedelta(seconds=expires_in-BUFFER):
+#     ACCESS_TOKEN, expires_in, token_type = get_access_token()
 
 
 
